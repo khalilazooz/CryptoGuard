@@ -1,0 +1,75 @@
+/* ============================================================================
+ *  RLP tool — styles
+ * ========================================================================== */
+.rlp { position: relative; min-height: 100%; padding: 28px; overflow: hidden; isolation: isolate; --rlp-accent: #6366f1; }
+.rlp-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(110% 110% at 0% 0%, #6366f1 0%, transparent 55%),
+    radial-gradient(120% 120% at 100% 100%, #8b5cf6 0%, transparent 55%),
+    linear-gradient(135deg, #11132e 0%, #1a1433 100%);
+  background-size: 160% 160%, 160% 160%, 100% 100%; animation: rlp-drift 24s ease-in-out infinite;
+}
+@keyframes rlp-drift { 0%{background-position:0% 0%,100% 100%,0 0} 50%{background-position:50% 40%,50% 60%,0 0} 100%{background-position:0% 0%,100% 100%,0 0} }
+@media (prefers-reduced-motion: reduce){ .rlp-bg{animation:none} }
+
+.rlp-card {
+  max-width: 880px; margin: 0 auto; background: rgba(255,255,255,.95); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.6); border-radius: 16px; box-shadow: 0 18px 48px rgba(0,0,0,.32);
+  padding: 24px; display: flex; flex-direction: column; gap: 14px;
+}
+.rlp-title { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.3px; color: var(--text) }
+.rlp-sub { margin: -8px 0 4px; font-size: 13px; color: var(--text-soft); line-height: 1.5 }
+
+.rlp-help-toggle { align-self: flex-start; border: none; background: transparent; color: var(--rlp-accent); font-size: 13px; font-weight: 700; cursor: pointer; padding: 2px 0 }
+.rlp-help { border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); padding: 14px 16px; font-size: 13px; color: var(--text); line-height: 1.55; display: flex; flex-direction: column; gap: 8px }
+.rlp-help p { margin: 0 }
+.rlp-help code { font-family: var(--mono); font-size: 12px; background: color-mix(in srgb, var(--rlp-accent) 12%, #fff); padding: 1px 5px; border-radius: 5px; }
+.rlp-help-rules-title { font-weight: 700; margin-top: 4px }
+.rlp-rules { border-collapse: collapse; width: 100%; font-size: 12.5px }
+.rlp-rules th, .rlp-rules td { text-align: left; padding: 6px 9px; border: 1px solid var(--border); vertical-align: top }
+.rlp-rules th { background: color-mix(in srgb, var(--rlp-accent) 10%, #fff); font-weight: 700 }
+.rlp-rules td:first-child { white-space: nowrap }
+.rlp-help-ex, .rlp-help-note { background: #fff; border-left: 3px solid var(--rlp-accent); padding: 8px 11px; border-radius: 0 8px 8px 0 }
+.rlp-help-note { border-left-color: #14b8a6 }
+
+.rlp-tabs { display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--surface-2); align-self: flex-start }
+.rlp-tabs button { border: none; background: transparent; padding: 8px 22px; font-size: 13px; font-weight: 600; color: var(--text-soft); cursor: pointer; transition: background .15s, color .15s }
+.rlp-tabs button.on { background: var(--rlp-accent); color: #fff }
+
+.rlp-field { display: flex; flex-direction: column; gap: 6px }
+.rlp-label { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text-soft) }
+.rlp-label em { font-style: normal; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text-faint) }
+.rlp textarea {
+  width: 100%; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); color: var(--text);
+  padding: 11px 12px; font-size: 13px; outline: none; resize: vertical; line-height: 1.5; word-break: break-all;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.rlp textarea:focus { border-color: var(--rlp-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--rlp-accent) 25%, transparent); background: #fff }
+.rlp-mono { font-family: var(--mono); font-size: 12.5px }
+.rlp-foot { font-size: 11.5px; color: var(--text-faint); line-height: 1.5 }
+.rlp-foot code { font-family: var(--mono); }
+
+.rlp-out-head { display: flex; align-items: center; justify-content: space-between }
+.rlp-copy { border: 1px solid var(--rlp-accent); background: var(--rlp-accent); color: #fff; font-weight: 600; font-size: 12.5px; padding: 6px 14px; border-radius: 9px; cursor: pointer }
+.rlp-copy:hover:not(:disabled) { filter: brightness(1.08) }
+.rlp-copy:disabled { opacity: .45; cursor: not-allowed }
+.rlp-out { background: #0f172a; color: #a5f3fc; border-radius: 11px; padding: 14px; font-size: 13px; word-break: break-all; white-space: pre-wrap; margin: 0 }
+.rlp-bytes { color: #64748b }
+
+.rlp-section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--rlp-accent); margin-top: 4px }
+.rlp-tree { background: #0f172a; color: #e2e8f0; border-radius: 11px; padding: 14px; font-size: 12.5px; line-height: 1.55; white-space: pre; overflow-x: auto; margin: 0 }
+
+.rlp-treeview { display: flex; flex-direction: column; gap: 4px; margin-top: 4px }
+.rlp-node { font-size: 12.5px }
+.rlp-node.str { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; padding: 5px 9px; border: 1px solid var(--border); border-left: 3px solid #14b8a6; border-radius: 8px; background: var(--surface-2) }
+.rlp-node.list { border: 1px solid var(--border); border-left: 3px solid var(--rlp-accent); border-radius: 8px; padding: 6px 9px; background: color-mix(in srgb, var(--rlp-accent) 5%, #fff) }
+.rlp-node-head { display: flex; align-items: center; gap: 8px }
+.rlp-node-children { display: flex; flex-direction: column; gap: 4px; margin: 6px 0 0 14px; padding-left: 8px; border-left: 1px dashed var(--border) }
+.rlp-node-tag { font-weight: 700; font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: #0f766e; background: #ccfbf1; padding: 1px 7px; border-radius: 6px; white-space: nowrap }
+.rlp-node-tag.list { color: #3730a3; background: #e0e7ff }
+.rlp-node-val { color: var(--text); word-break: break-all }
+.rlp-node-ascii { color: #166534; font-weight: 600 }
+.rlp-node-prefix { font-size: 10.5px; color: var(--text-faint); font-family: var(--mono) }
+
+.rlp-err { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; border-radius: 10px; padding: 11px 12px; font-size: 13px }

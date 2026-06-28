@@ -1,0 +1,101 @@
+/* ============================================================================
+ *  Varint Calculator — styles  (mirrors the RLP tool's visual language)
+ * ========================================================================== */
+.vi { position: relative; min-height: 100%; padding: 28px; overflow: hidden; isolation: isolate; --vi-accent: #0d9488; --vi-btc: #f7931a; }
+.vi-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(110% 110% at 0% 0%, #0d9488 0%, transparent 55%),
+    radial-gradient(120% 120% at 100% 100%, #f7931a 0%, transparent 52%),
+    linear-gradient(135deg, #0c1f29 0%, #1a1726 100%);
+  background-size: 160% 160%, 160% 160%, 100% 100%; animation: vi-drift 26s ease-in-out infinite;
+}
+@keyframes vi-drift { 0%{background-position:0% 0%,100% 100%,0 0} 50%{background-position:50% 40%,50% 60%,0 0} 100%{background-position:0% 0%,100% 100%,0 0} }
+@media (prefers-reduced-motion: reduce){ .vi-bg{animation:none} }
+
+.vi-card {
+  max-width: 880px; margin: 0 auto; background: rgba(255,255,255,.95); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.6); border-radius: 16px; box-shadow: 0 18px 48px rgba(0,0,0,.32);
+  padding: 24px; display: flex; flex-direction: column; gap: 14px;
+}
+.vi-title { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.3px; color: var(--text) }
+.vi-sub { margin: -8px 0 4px; font-size: 13px; color: var(--text-soft); line-height: 1.5 }
+
+/* ---- explainer ---- */
+.vi-help-toggle { align-self: flex-start; border: none; background: transparent; color: var(--vi-accent); font-size: 13px; font-weight: 700; cursor: pointer; padding: 2px 0; text-align: left }
+.vi-help { border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); padding: 14px 16px; font-size: 13px; color: var(--text); line-height: 1.55; display: flex; flex-direction: column; gap: 10px }
+.vi-help p { margin: 0 }
+.vi-help code { font-family: var(--mono); font-size: 12px; background: color-mix(in srgb, var(--vi-accent) 12%, #fff); padding: 1px 5px; border-radius: 5px; }
+.vi-help-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+.vi-help-col { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: #fff }
+.vi-help-col h4 { margin: 0 0 6px; font-size: 13px; font-weight: 800 }
+.vi-help-col ul { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 5px }
+.vi-help-col li { font-size: 12.3px; line-height: 1.45 }
+.vi-help-diff { border-collapse: collapse; width: 100%; font-size: 12.3px }
+.vi-help-diff th, .vi-help-diff td { text-align: left; padding: 6px 9px; border: 1px solid var(--border); vertical-align: top }
+.vi-help-diff th { background: color-mix(in srgb, var(--vi-accent) 10%, #fff); font-weight: 700 }
+.vi-help-diff td:first-child { font-weight: 700; white-space: nowrap; color: var(--text-soft) }
+.vi-help-note { background: #fff; border-left: 3px solid var(--vi-accent); padding: 8px 11px; border-radius: 0 8px 8px 0 }
+@media (max-width: 640px){ .vi-help-cols { grid-template-columns: 1fr } }
+
+/* ---- tabs ---- */
+.vi-tabs { display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--surface-2); align-self: flex-start; flex-wrap: wrap }
+.vi-tabs button { border: none; background: transparent; padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-soft); cursor: pointer; transition: background .15s, color .15s }
+.vi-scheme button.on { background: var(--vi-accent); color: #fff }
+.vi-mode button.on { background: #475569; color: #fff }
+
+/* ---- fields ---- */
+.vi-field { display: flex; flex-direction: column; gap: 6px }
+.vi-label { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text-soft) }
+.vi-label em { font-style: normal; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text-faint) }
+.vi-input {
+  width: 100%; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); color: var(--text);
+  padding: 11px 12px; font-size: 13px; outline: none; line-height: 1.5;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.vi-input:focus { border-color: var(--vi-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--vi-accent) 25%, transparent); background: #fff }
+.vi-mono, .mono { font-family: var(--mono); font-size: 12.5px }
+.vi-type { max-width: 280px }
+.vi-select { border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); color: var(--text); padding: 9px 10px; font-size: 13px; outline: none }
+.vi-select:focus { border-color: var(--vi-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--vi-accent) 25%, transparent) }
+.vi-foot { font-size: 11.5px; color: var(--text-faint); line-height: 1.5 }
+
+/* ---- result ---- */
+.vi-result { display: flex; flex-direction: column; gap: 8px }
+.vi-out-head { display: flex; align-items: center; justify-content: space-between }
+.vi-copy { border: 1px solid var(--vi-accent); background: var(--vi-accent); color: #fff; font-weight: 600; font-size: 12.5px; padding: 6px 14px; border-radius: 9px; cursor: pointer }
+.vi-copy:hover { filter: brightness(1.08) }
+.vi-out { background: #0f172a; color: #5eead4; border-radius: 11px; padding: 14px; font-size: 14px; word-break: break-all; white-space: pre-wrap; margin: 0; letter-spacing: .5px }
+.vi-bytes { color: #64748b; letter-spacing: 0 }
+
+.vi-chips { display: flex; flex-wrap: wrap; gap: 6px }
+.vi-chip { font-size: 11px; font-weight: 600; color: #0f766e; background: #ccfbf1; padding: 2px 9px; border-radius: 999px; white-space: nowrap }
+.vi-note { font-size: 12.3px; color: var(--text-soft); line-height: 1.5; margin: 0; background: #fff; border-left: 3px solid var(--vi-accent); padding: 7px 11px; border-radius: 0 8px 8px 0 }
+
+/* ---- protobuf per-byte breakdown ---- */
+.vi-groups { display: flex; flex-direction: column; gap: 6px; margin-top: 2px }
+.vi-groups-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--vi-accent) }
+.vi-groups-row { display: flex; flex-wrap: wrap; gap: 8px }
+.vi-group { border: 1px solid var(--border); border-radius: 9px; padding: 7px 9px; background: var(--surface-2); display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 92px }
+.vi-group.last { border-color: var(--vi-accent); background: color-mix(in srgb, var(--vi-accent) 7%, #fff) }
+.vi-group-hex { font-weight: 700; font-size: 12.5px }
+.vi-group-bits { font-size: 12px; letter-spacing: 1px }
+.vi-cont { color: #94a3b8; font-weight: 700 }
+.vi-cont.on { color: #dc2626 }
+.vi-payload { color: #0f766e; font-weight: 700 }
+.vi-group-tag { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .04em }
+.vi-groups-legend { font-size: 11px; color: var(--text-faint) }
+.vi-groups-legend .vi-cont, .vi-groups-legend .vi-payload { font-size: 11px }
+
+/* ---- compare ---- */
+.vi-compare { display: flex; flex-direction: column; gap: 8px }
+.vi-cmp-table { border-collapse: collapse; width: 100%; font-size: 12.8px }
+.vi-cmp-table th, .vi-cmp-table td { text-align: left; padding: 8px 10px; border: 1px solid var(--border) }
+.vi-cmp-table th { background: color-mix(in srgb, var(--vi-accent) 10%, #fff); font-weight: 700 }
+.vi-cmp-bytes { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums }
+.vi-cmp-na { color: var(--text-faint) }
+.vi-cmp-na em { font-style: normal }
+.vi-cmp-note { font-size: 12.3px; color: var(--text-soft); line-height: 1.55; margin: 0 }
+.vi-cmp-note code { font-family: var(--mono); font-size: 11.5px; background: color-mix(in srgb, var(--vi-accent) 12%, #fff); padding: 1px 5px; border-radius: 5px }
+
+.vi-err { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; border-radius: 10px; padding: 11px 12px; font-size: 13px }

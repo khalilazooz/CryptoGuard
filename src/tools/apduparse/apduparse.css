@@ -1,0 +1,82 @@
+/* ============================================================================
+ *  APDU Parser — styles
+ * ========================================================================== */
+.ap { position: relative; min-height: 100%; padding: 28px; overflow: hidden; isolation: isolate; --ap-accent: #2563eb; }
+.ap-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(110% 110% at 0% 0%, #2563eb 0%, transparent 55%),
+    radial-gradient(120% 120% at 100% 100%, #14b8a6 0%, transparent 55%),
+    linear-gradient(135deg, #0b1530 0%, #0d1f2b 100%);
+  background-size: 160% 160%, 160% 160%, 100% 100%; animation: ap-drift 24s ease-in-out infinite;
+}
+@keyframes ap-drift { 0%{background-position:0% 0%,100% 100%,0 0} 50%{background-position:50% 40%,50% 60%,0 0} 100%{background-position:0% 0%,100% 100%,0 0} }
+@media (prefers-reduced-motion: reduce){ .ap-bg{animation:none} }
+
+.ap-card {
+  max-width: 880px; margin: 0 auto; background: rgba(255,255,255,.95); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.6); border-radius: 16px; box-shadow: 0 18px 48px rgba(0,0,0,.32);
+  padding: 24px; display: flex; flex-direction: column; gap: 14px;
+}
+.ap-title { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.3px; color: var(--text) }
+.ap-sub { margin: -8px 0 4px; font-size: 13px; color: var(--text-soft); line-height: 1.5 }
+
+.ap-field { display: flex; flex-direction: column; gap: 6px }
+.ap-label { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text-soft) }
+.ap-inline select { border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); font-size: 12px; padding: 4px 8px; color: var(--text); cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 600 }
+.ap textarea, .ap-ref-search {
+  width: 100%; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2);
+  color: var(--text); padding: 11px 12px; font-size: 13px; outline: none; transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.ap textarea { resize: vertical; line-height: 1.5; word-break: break-all }
+.ap textarea:focus, .ap-ref-search:focus { border-color: var(--ap-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ap-accent) 25%, transparent); background: #fff }
+.ap-mono { font-family: var(--mono); font-size: 12.5px }
+
+.ap-detected {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 12px; border-radius: 11px;
+  background: color-mix(in srgb, var(--ap-accent) 11%, #fff); border: 1px solid color-mix(in srgb, var(--ap-accent) 32%, transparent);
+}
+.ap-tag { font-size: 14px; font-weight: 800; color: #fff; background: var(--ap-accent); border-radius: 7px; padding: 3px 10px; font-family: var(--mono) }
+.ap-tag.resp { background: #0891b2 }
+.ap-tag.unknown { background: #64748b; font-family: inherit; font-weight: 700 }
+.ap-cls { font-size: 12.5px; font-weight: 700; color: var(--ap-accent) }
+.ap-bytes { margin-left: auto; font-size: 11.5px; color: var(--text-faint) }
+.ap-sw { font-family: var(--mono); font-weight: 800; font-size: 15px; color: var(--text) }
+.ap-sw-name { font-weight: 700; font-size: 12.5px; padding: 2px 8px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border) }
+.ap-sw-name.ok { background: #dcfce7; color: #166534; border-color: #86efac }
+.ap-sw-name.warn { background: #fef3c7; color: #92400e; border-color: #fde68a }
+.ap-sw-name.unknown { background: #fee2e2; color: #b91c1c; border-color: #fca5a5 }
+.ap-sw-desc { font-size: 12px; color: var(--text-soft) }
+
+.ap-desc { font-size: 12.5px; color: var(--text-soft); line-height: 1.5; padding: 0 2px }
+.ap-section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--ap-accent); margin-top: 6px }
+.ap-section-title em { font-style: normal; font-weight: 500; color: var(--text-faint); text-transform: none; letter-spacing: 0 }
+
+.ap-fields { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 11px; overflow: hidden }
+.ap-fields.small .ap-row { padding: 5px 10px; font-size: 12px }
+.ap-row { display: grid; grid-template-columns: 150px minmax(0,1fr) 1.4fr; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 13px; align-items: baseline }
+.ap-row:last-child { border-bottom: none }
+.ap-row:nth-child(even) { background: var(--surface-2) }
+.ap-row.data { background: color-mix(in srgb, var(--ap-accent) 6%, #fff) }
+.ap-row.data.leftover { background: #fff7ed }
+.ap-k { font-weight: 700; color: var(--text-soft); word-break: break-word }
+.ap-v { color: var(--text); word-break: break-all }
+.ap-v.mono, .ap-k.mono { font-family: var(--mono); font-size: 12px }
+.ap-note { color: var(--text-faint); font-size: 11.5px; word-break: break-word }
+
+.ap-err { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; border-radius: 10px; padding: 11px 12px; font-size: 13px }
+
+.ap-ref-toggle { align-self: flex-start; border: none; background: transparent; color: var(--ap-accent); font-size: 12.5px; font-weight: 600; cursor: pointer; padding: 4px 0; margin-top: 4px }
+.ap-ref { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--border); padding-top: 12px }
+.ap-ref-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--text-soft); margin-top: 6px }
+
+/* embedded-transaction handoff to the Coin Parser */
+.ap-tx { border: 1px solid color-mix(in srgb, var(--ap-accent) 30%, transparent); border-radius: 11px; padding: 10px 12px; background: color-mix(in srgb, var(--ap-accent) 7%, #fff); display: flex; flex-direction: column; gap: 8px; }
+.ap-tx-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.ap-tx-btn { border: 1px solid var(--ap-accent); background: var(--ap-accent); color: #fff; font-weight: 700; font-size: 12.5px; padding: 6px 14px; border-radius: 9px; cursor: pointer; white-space: nowrap; }
+.ap-tx-btn:hover { filter: brightness(1.08); }
+.ap-tx-hex { background: #0f172a; color: #e2e8f0; border-radius: 9px; padding: 11px; font-size: 11.5px; line-height: 1.5; max-height: 160px; overflow: auto; margin: 0; white-space: pre-wrap; word-break: break-all; }
+
+/* decoded token data: highlight the human-readable name */
+.ap-row.token-name { background: color-mix(in srgb, #16a34a 10%, #fff); }
+.ap-row.token-name .ap-v { font-weight: 700; color: #166534; }

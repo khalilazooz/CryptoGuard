@@ -1,0 +1,157 @@
+/* ============================================================================
+ *  ECDSA Sign & Verify tool — styles
+ * ========================================================================== */
+.ec {
+  position: relative;
+  min-height: 100%;
+  padding: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  --ec-accent: #0ea5e9;
+}
+.ec-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(110% 110% at 0% 0%, #0ea5e9 0%, transparent 55%),
+    radial-gradient(120% 120% at 100% 100%, #6366f1 0%, transparent 55%),
+    linear-gradient(135deg, #0b1220 0%, #111a2e 100%);
+  background-size: 160% 160%, 160% 160%, 100% 100%;
+  animation: ec-drift 22s ease-in-out infinite;
+}
+@keyframes ec-drift {
+  0% { background-position: 0% 0%, 100% 100%, 0 0; }
+  50% { background-position: 50% 40%, 50% 60%, 0 0; }
+  100% { background-position: 0% 0%, 100% 100%, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) { .ec-bg { animation: none; } }
+
+.ec-card {
+  max-width: 840px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ec-title { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -0.3px; color: var(--text); }
+.ec-sub { margin: -8px 0 4px; font-size: 13px; color: var(--text-soft); line-height: 1.5; }
+
+.ec-field { display: flex; flex-direction: column; gap: 6px; }
+.ec-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+.ec-label em { font-style: normal; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text-faint); }
+
+.ec-inline-ctl { display: inline-flex; gap: 6px; }
+.ec-inline-ctl select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  font-size: 12px;
+  padding: 4px 8px;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ec input,
+.ec textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.ec input:focus,
+.ec textarea:focus {
+  border-color: var(--ec-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ec-accent) 25%, transparent);
+  background: #fff;
+}
+.ec textarea { resize: vertical; line-height: 1.5; word-break: break-all; }
+.ec-mono { font-family: var(--mono); font-size: 12.5px; }
+.ec-auto { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+
+.ec-mini {
+  border: 1px solid var(--ec-accent);
+  background: transparent;
+  color: var(--ec-accent);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.ec-mini:hover:not(:disabled) { background: var(--ec-accent); color: #fff; }
+.ec-mini:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.ec-actions { display: flex; gap: 12px; margin-top: 4px; }
+.ec-btn {
+  flex: 1;
+  border: none;
+  border-radius: 11px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.05s;
+}
+.ec-btn:active { transform: translateY(1px); }
+.ec-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.ec-sign { background: var(--ec-accent); color: #fff; }
+.ec-verify { background: #1e293b; color: #fff; }
+.ec-btn:hover:not(:disabled) { filter: brightness(1.08); }
+
+.ec-result {
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  word-break: break-word;
+}
+.ec-ok  { background: #dcfce7; border: 1px solid #86efac; color: #166534; }
+.ec-bad { background: #fee2e2; border: 1px solid #fca5a5; color: #b91c1c; }
+.ec-err { background: #fef3c7; border: 1px solid #fde68a; color: #92400e; }
+
+/* ---- multi-curve additions ---- */
+.ec-curve {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ec-curve:focus {
+  border-color: var(--ec-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ec-accent) 25%, transparent);
+  outline: none;
+}
+.ec-inline-ctl select:disabled { opacity: 0.5; cursor: not-allowed; }
+.ec-foot { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }

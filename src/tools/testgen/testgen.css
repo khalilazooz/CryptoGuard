@@ -1,0 +1,285 @@
+/* ============================================================================
+ *  Test Record Generator — styles
+ *  Animated, per-coin branded backdrop + a glassy control card on top.
+ * ========================================================================== */
+
+.trg {
+  position: relative;
+  min-height: 100%;
+  padding: 28px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---- animated branded backdrop ---- */
+.trg-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 120% at 0% 0%, var(--coin-to) 0%, transparent 55%),
+    radial-gradient(120% 120% at 100% 100%, var(--coin-accent) 0%, transparent 50%),
+    linear-gradient(135deg, var(--coin-from) 0%, var(--coin-to) 100%);
+  background-size: 180% 180%, 180% 180%, 100% 100%;
+  animation:
+    trg-drift 18s ease-in-out infinite,
+    trg-fade 0.6s ease both;
+  opacity: 1;
+}
+
+@keyframes trg-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes trg-drift {
+  0%   { background-position: 0% 0%, 100% 100%, 0 0; }
+  50%  { background-position: 60% 40%, 40% 60%, 0 0; }
+  100% { background-position: 0% 0%, 100% 100%, 0 0; }
+}
+
+/* floating coin glyphs */
+.trg-glyph {
+  position: absolute;
+  font-size: 180px;
+  font-weight: 800;
+  color: #ffffff;
+  opacity: 0.07;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+}
+.trg-glyph-a { top: -30px;  right: 6%;  animation: trg-float 14s ease-in-out infinite; }
+.trg-glyph-b { bottom: 4%;  left: -20px; font-size: 120px; animation: trg-float 20s ease-in-out infinite reverse; }
+.trg-glyph-c { top: 42%;    left: 48%;   font-size: 90px;  opacity: 0.05; animation: trg-float 24s ease-in-out infinite; }
+
+@keyframes trg-float {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-26px) rotate(8deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trg-bg, .trg-glyph { animation: none; }
+}
+
+/* ---- control card ---- */
+.trg-card {
+  max-width: 860px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trg-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.trg-field { display: flex; flex-direction: column; gap: 6px; }
+.trg-grow { flex: 1; min-width: 220px; }
+.trg-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+.trg-mono { font-family: var(--mono); font-size: 12.5px; }
+
+.trg input,
+.trg textarea,
+.trg select {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  padding: 9px 11px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+}
+.trg input:focus,
+.trg textarea:focus,
+.trg select:focus {
+  border-color: var(--coin-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--coin-accent) 25%, transparent);
+  background: #fff;
+}
+.trg textarea { resize: vertical; line-height: 1.5; }
+
+/* coin select with leading glyph */
+.trg-coin { min-width: 240px; }
+.trg-select-wrap { position: relative; }
+.trg-select-glyph {
+  position: absolute;
+  left: 11px; top: 50%; transform: translateY(-50%);
+  font-weight: 800; font-size: 15px;
+  color: var(--coin-to);
+  pointer-events: none;
+}
+.trg-select-wrap select { padding-left: 32px; font-weight: 600; }
+
+/* flow toggle */
+.trg-flow { min-width: 200px; }
+.trg-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.trg-toggle button {
+  border: none;
+  background: transparent;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.trg-toggle button.on {
+  background: var(--coin-accent);
+  color: #fff;
+}
+.trg-toggle button:disabled {
+  color: var(--text-faint);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.trg-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+.trg-check input { width: auto; }
+
+.trg-err {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+}
+.trg-note {
+  background: var(--brand-soft);
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+}
+
+.trg-out-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.trg-copy {
+  border: 1px solid var(--coin-accent);
+  background: var(--coin-accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 12.5px;
+  padding: 7px 16px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.trg-copy:hover:not(:disabled) { filter: brightness(1.08); }
+.trg-copy:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.trg-out {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  overflow-x: auto;
+  white-space: pre;
+  max-height: 420px;
+  overflow-y: auto;
+  margin: 0;
+}
+
+/* ---- UTXO multi-input UI ---- */
+.trg-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--coin-accent) 16%, #fff);
+  border: 1px solid color-mix(in srgb, var(--coin-accent) 35%, transparent);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.trg-inputs-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.trg-add {
+  border: 1px solid var(--coin-accent);
+  background: transparent;
+  color: var(--coin-accent);
+  font-weight: 600;
+  font-size: 12.5px;
+  padding: 6px 13px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.trg-add:hover { background: var(--coin-accent); color: #fff; }
+
+.trg-input-card {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--coin-accent);
+  border-radius: 11px;
+  background: var(--surface-2);
+  padding: 12px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.trg-input-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.trg-input-idx {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--coin-to);
+  font-family: var(--mono);
+}
+.trg-rm {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-faint);
+  width: 24px; height: 24px;
+  border-radius: 7px;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 12px;
+}
+.trg-rm:hover { color: #b91c1c; border-color: #fecaca; }
+
+.trg-sublabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-faint);
+}

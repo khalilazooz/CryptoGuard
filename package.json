@@ -1,0 +1,25 @@
+{
+  "name": "twi-cryptoguard-toolhub",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "TWI CryptoGuard ToolHub — sidebar-driven hub of CryptoGuard developer tools",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@noble/curves": "^1.9.7",
+    "@noble/hashes": "^1.8.0",
+    "@noble/secp256k1": "^2.3.0",
+    "protobufjs": "^7.6.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8"
+  }
+}
