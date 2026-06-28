@@ -15,10 +15,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
-env:
-  # Directory of the Vite app within the repo.
-  APP_DIR: app/peripheral/twi_crypto_guard/WALLET_APP/Common/APPLETS/tool_hub
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,16 +25,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
-          cache-dependency-path: ${{ env.APP_DIR }}/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: ${{ env.APP_DIR }}
         run: npm ci
 
       - name: Build
-        working-directory: ${{ env.APP_DIR }}
         run: npm run build
 
       - name: Setup Pages
@@ -47,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.APP_DIR }}/dist
+          path: dist
 
   deploy:
     needs: build
